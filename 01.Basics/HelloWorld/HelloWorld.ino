@@ -1,5 +1,10 @@
+/*
+ * Hello World
+ * Simply prints Hello World to the serial monitor.
+ */
+
 void setup() {
-  // initialize serial communications at 9600 bps:
+  // initialize serial communications at 9600 bps
   Serial.begin(9600);
 }
 
