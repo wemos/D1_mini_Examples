@@ -4,8 +4,8 @@
  */
 
 const int ledPin = BUILTIN_LED;  // the onboard LED
-const int brightness = 0;        // how bright the LED is (0 = off, 128 = dim, 255 = full)
-const int fadeAmount = 5;        // how many points to fade the LED by
+int brightness = 0;        // how bright the LED is (0 = off, 128 = dim, 255 = full)
+int fadeAmount = 5;        // how many points to fade the LED by
 const int delayMillis = 30;      // how long to pause between each loop
 
 void setup() {
