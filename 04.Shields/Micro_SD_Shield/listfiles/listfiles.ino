@@ -1,29 +1,32 @@
 /*
-  Listfiles
- 
- This example shows how print out the files in a 
- directory on a SD card 
- 	
- The circuit:
- * SD card attached to SPI bus as follows:
- ** MOSI - pin 11
- ** MISO - pin 12
- ** CLK - pin 13
- ** CS - pin 4
-
- created   Nov 2010
- by David A. Mellis
- modified 9 Apr 2012
- by Tom Igoe
- modified 2 Feb 2014
- by Scott Fitzgerald
- 
- This example code is in the public domain.
-
+ * Micro SD Shield - List files
+ *
+ * This example shows how print out the files in a directory on a SD card
+ *
+ * The WeMos Micro SD Shield uses:
+ * D5, D6, D7, D8, 3V3 and G
+ *
+ * The shield uses SPI bus pins:
+ * D5 = CLK
+ * D6 = MISO
+ * D7 = MOSI
+ * D8 = CS
+ *
+ * The SD card library uses 8.3 format filenames and is case-insensitive.
+ * eg. IMAGE.JPG is the same as image.jpg
+ *
+ * created Nov 2010 by David A. Mellis
+ * modified 9 Apr 2012 by Tom Igoe
+ * modified 2 Feb 2014 by Scott Fitzgerald
+ *
+ * This example code is in the public domain.
+ * https://github.com/esp8266/Arduino/blob/master/libraries/SD/examples/listfiles/listfiles.ino
  */
+
 #include <SPI.h>
 #include <SD.h>
 
+const int chipSelect = D8;
 File root;
 
 void setup()
@@ -36,7 +39,7 @@ void setup()
 
   Serial.print("Initializing SD card...");
 
-  if (!SD.begin(SS)) {
+  if (!SD.begin(chipSelect)) {
     Serial.println("initialization failed!");
     return;
   }
@@ -51,12 +54,11 @@ void setup()
 
 void loop()
 {
-  // nothing happens after setup finishes.
+  // nothing happens after setup
 }
 
 void printDirectory(File dir, int numTabs) {
    while(true) {
-     
      File entry =  dir.openNextFile();
      if (! entry) {
        // no more files
@@ -77,6 +79,3 @@ void printDirectory(File dir, int numTabs) {
      entry.close();
    }
 }
-
-
-

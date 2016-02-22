@@ -1,24 +1,29 @@
 /*
-  SD card test
-
- This example shows how use the utility libraries on which the'
- SD library is based in order to get info about your SD card.
- Very useful for testing a card when you're not sure whether its working or not.
-
- The circuit:
-  * SD card attached to SPI bus as follows:
- ** MOSI - pin 11 on Arduino Uno/Duemilanove/Diecimila
- ** MISO - pin 12 on Arduino Uno/Duemilanove/Diecimila
- ** CLK - pin 13 on Arduino Uno/Duemilanove/Diecimila
- ** CS - depends on your SD card shield or module.
- 		Pin 4 used here for consistency with other Arduino examples
-
-
- created  28 Mar 2011
- by Limor Fried
- modified 9 Apr 2012
- by Tom Igoe
+ * Micro SD Shield - Card info
+ *
+ * This example shows how use the utility libraries on which the'
+ * SD library is based in order to get info about your SD card.
+ * Very useful for testing a card when you're not sure whether its working or not.
+ *
+ * The WeMos Micro SD Shield uses:
+ * D5, D6, D7, D8, 3V3 and G
+ *
+ * The shield uses SPI bus pins:
+ * D5 = CLK
+ * D6 = MISO
+ * D7 = MOSI
+ * D8 = CS
+ *
+ * The SD card library uses 8.3 format filenames and is case-insensitive.
+ * eg. IMAGE.JPG is the same as image.jpg
+ *
+ * created  28 Mar 2011 by Limor Fried
+ * modified 9 Apr 2012 by Tom Igoe
+ *
+ * This example code is in the public domain.
+ * https://github.com/esp8266/Arduino/blob/master/libraries/SD/examples/CardInfo/CardInfo.ino
  */
+
 // include the SD library:
 #include <SPI.h>
 #include <SD.h>
@@ -32,7 +37,8 @@ SdFile root;
 // Arduino Ethernet shield: pin 4
 // Adafruit SD shields and modules: pin 10
 // Sparkfun SD shield: pin 8
-const int chipSelect = SS;
+// WeMos Micro SD Shield: D8
+const int chipSelect = D8;
 
 void setup()
 {
@@ -41,7 +47,6 @@ void setup()
   while (!Serial) {
     ; // wait for serial port to connect. Needed for Leonardo only
   }
-
 
   Serial.print("\nInitializing SD card...");
 
@@ -79,7 +84,6 @@ void setup()
     return;
   }
 
-
   // print the type and size of the first FAT-type volume
   uint32_t volumesize;
   Serial.print("\nVolume type is FAT");
@@ -98,7 +102,6 @@ void setup()
   volumesize /= 1024;
   Serial.println(volumesize);
 
-
   Serial.println("\nFiles found on the card (name, date and size in bytes): ");
   root.openRoot(volume);
 
@@ -106,7 +109,7 @@ void setup()
   root.ls(LS_R | LS_DATE | LS_SIZE);
 }
 
-
-void loop(void) {
-
+void loop()
+{
+  // nothing happens after setup
 }

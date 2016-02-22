@@ -1,5 +1,11 @@
-// Example testing sketch for various DHT humidity/temperature sensors
-// Written by ladyada, public domain
+/* DHT Shield - Simple
+ *
+ * Example testing sketch for various DHT humidity/temperature sensors
+ * Written by ladyada, public domain
+ *
+ * Depends on Adafruit DHT Arduino library
+ * https://github.com/adafruit/DHT-sensor-library
+ */
 
 #include "DHT.h"
 

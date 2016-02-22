@@ -3,11 +3,13 @@
  * NativeSdk by Simon Peter
  * Access functionality from the Espressif ESP8266 SDK
  * This example code is in the public domain
- * 
+ *
  * This is for advanced users.
  * Note that this makes your code dependent on the ESP8266, which is generally
  * a bad idea. So you should try to use esp8266/Arduino functionality
  * where possible instead, in order to abstract away the hardware dependency.
+ *
+ * https://github.com/esp8266/Arduino/blob/master/libraries/esp8266/examples/CallSDKFunctions/CallSDKFunctions.ino
  */
 
 // Expose Espressif SDK functionality - wrapped in ifdef so that it still

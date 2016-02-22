@@ -3,7 +3,9 @@
  *
  * Reads the value of each byte of the EEPROM and prints it
  * to the computer.
+ *
  * This example code is in the public domain.
+ * https://github.com/esp8266/Arduino/blob/master/libraries/EEPROM/examples/eeprom_read/eeprom_read.ino
  */
 
 #include <EEPROM.h>
