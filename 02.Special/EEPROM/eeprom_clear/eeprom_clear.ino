@@ -2,8 +2,9 @@
  * EEPROM Clear
  *
  * Sets all of the bytes of the EEPROM to 0.
+ *
  * This example code is in the public domain.
-
+ * https://github.com/esp8266/Arduino/blob/master/libraries/EEPROM/examples/eeprom_clear/eeprom_clear.ino
  */
 
 #include <EEPROM.h>
