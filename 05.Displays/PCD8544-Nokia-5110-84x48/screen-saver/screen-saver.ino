@@ -1,5 +1,5 @@
-/* Hello World
- * Display a simple message on the first line of the screen
+/* Screen Saver
+ * Move a bitmap around, bounce it off walls like an old screensaver
  *
  * Connections:
  * WeMos D1 Mini   Nokia 5110    Description
@@ -30,6 +30,9 @@
 #include <Adafruit_GFX.h>
 #include <Adafruit_PCD8544.h>
 
+// Bitmaps
+#include "cool-smiley-15x15.h"
+
 // Pins
 const int8_t RST_PIN = D2;
 const int8_t CE_PIN = D1;
@@ -37,6 +40,24 @@ const int8_t DC_PIN = D6;
 //const int8_t DIN_PIN = D7;  // Uncomment for Software SPI
 //const int8_t CLK_PIN = D5;  // Uncomment for Software SPI
 const int8_t BL_PIN = D0;
+
+// 15x15 smiley
+const int8_t ART_W = 15;
+const int8_t ART_H = 15;
+
+// Area the smiley can move in
+const int8_t BOUNDS_W = 69;   // 84 - 15
+const int8_t BOUNDS_H = 33;   // 48 - 15
+
+// Direction smiley is moving
+int8_t move_x = 1;
+int8_t move_y = 1;
+
+// Pause between displaying frames
+int pause = 500;
+
+// Start position
+int8_t x = 1, y = 1;
 
 
 // Software SPI with explicit CE pin.
@@ -66,13 +87,24 @@ void setup() {
   delay(2000);
 
   display.clearDisplay();
-  display.setTextSize(1);
-  display.setTextColor(BLACK);
-  display.setCursor(0,0);
-  display.println("Hello, world!");
   display.display();
-  Serial.println("You should now see Hello, world! on the display");
 }
 
 void loop() {
+  // Draw the bitmap
+  display.clearDisplay();
+  display.drawBitmap(x, y, Cool_Smiley_15x15, 15, 15, 1);
+  display.display();
+  delay(pause);
+
+  // Move down right until hit bounds
+  // Then flip increment to decrement to bounce off the wall
+  x = x + move_x;
+  y = y + move_y;
+  if (x <= 0 || x >= BOUNDS_W) {
+    move_x = -move_x;
+  }
+  if (y <= 0 || y >= BOUNDS_H) {
+    move_y = -move_y;
+  }
 }
