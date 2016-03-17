@@ -1,5 +1,5 @@
-/* Hello World
- * Display a simple message on the first line of the screen
+/* Text Rotation
+ * Display some characters at 0, 90, 180 and 270 degrees
  *
  * Connections:
  * WeMos D1 Mini   Nokia 5110    Description
@@ -34,8 +34,8 @@
 const int8_t RST_PIN = D2;
 const int8_t CE_PIN = D1;
 const int8_t DC_PIN = D6;
-//const int8_t DIN_PIN = D7;  // Uncomment for Software SPI
-//const int8_t CLK_PIN = D5;  // Uncomment for Software SPI
+//const int8_t DIN_PIN = D7;  // uncomment for Software SPI
+//const int8_t CLK_PIN = D5;  // uncomment for Software SPI
 const int8_t BL_PIN = D0;
 
 
@@ -68,11 +68,38 @@ void setup() {
   display.clearDisplay();
   display.setTextSize(1);
   display.setTextColor(BLACK);
-  display.setCursor(0,0);
-  display.println("Hello, world!");
   display.display();
-  Serial.println("You should now see Hello, world! on the display");
 }
 
 void loop() {
+  // setRotation(0) = 0 degrees
+  // setRotation(1) = 90 degrees counter clockwise
+  // setRotation(2) = 180 degrees counter clockwise
+  // setRotation(3) = 270 degrees counter clockwise
+
+  for (uint8_t i = 0; i <= 3; i++) {
+    display.clearDisplay();
+    display.setRotation(i);
+    display.setCursor(0,0);
+    // Print some ASCII characters (A-Z, a-z, 0-9, !-/, :-@)
+    for (char c = 'A'; c <= 'Z'; c++) {
+      display.print(c);
+    }
+    for (char c = 'a'; c <= 'z'; c++) {
+      display.print(c);
+    }
+    for (char c = '0'; c <= '9'; c++) {
+      display.print(c);
+    }
+    for (char c = 33; c <= 47; c++) {
+      display.print(c);
+    }
+    for (char c = 58; c <= 64; c++) {
+      display.print(c);
+    }
+    display.display();
+    Serial.print(i * 90);
+    Serial.println(" degrees");
+    delay(2000);
+  }
 }

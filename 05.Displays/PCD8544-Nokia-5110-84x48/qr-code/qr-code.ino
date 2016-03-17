@@ -1,5 +1,6 @@
-/* Hello World
- * Display a simple message on the first line of the screen
+/* QR Code
+ * Displays a QR Code.
+ * You'll have to scan it to find out what it is.
  *
  * Connections:
  * WeMos D1 Mini   Nokia 5110    Description
@@ -29,6 +30,9 @@
 #include <SPI.h>
 #include <Adafruit_GFX.h>
 #include <Adafruit_PCD8544.h>
+
+// Bitmaps
+#include "qr-code-25x25.h"
 
 // Pins
 const int8_t RST_PIN = D2;
@@ -66,12 +70,8 @@ void setup() {
   delay(2000);
 
   display.clearDisplay();
-  display.setTextSize(1);
-  display.setTextColor(BLACK);
-  display.setCursor(0,0);
-  display.println("Hello, world!");
+  display.drawBitmap(29, 11, QR_Code_25x25, 25, 25, 1);
   display.display();
-  Serial.println("You should now see Hello, world! on the display");
 }
 
 void loop() {

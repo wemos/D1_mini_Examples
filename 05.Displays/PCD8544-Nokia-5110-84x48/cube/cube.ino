@@ -1,5 +1,4 @@
-/* Hello World
- * Display a simple message on the first line of the screen
+/* Rotating 3D cube
  *
  * Connections:
  * WeMos D1 Mini   Nokia 5110    Description
@@ -49,6 +48,20 @@ const int8_t BL_PIN = D0;
 // NOTE: MISO and SS will be set as an input and output respectively, so be careful sharing those pins!
 Adafruit_PCD8544 display = Adafruit_PCD8544(DC_PIN, CE_PIN, RST_PIN);
 
+
+#define SHAPE_SIZE 700
+#define ROTATION_SPEED 25 // Delay in ms between cube redraws
+
+float d = 3;
+float px[] = { -d,  d,  d, -d, -d,  d,  d, -d };
+float py[] = { -d, -d,  d,  d, -d, -d,  d,  d };
+float pz[] = { -d, -d, -d, -d,  d,  d,  d,  d };
+
+float p2x[] = {0,0,0,0,0,0,0,0};
+float p2y[] = {0,0,0,0,0,0,0,0};
+
+float r[] = {0,0,0};
+
 void setup() {
   Serial.begin(9600);
   Serial.println("\n\nWeMos D1 Mini + Nokia 5110 PCD8544 84x48 Monochrome LCD\nUsing Adafruit_PCD8544 and Adafruit_GFX libraries\n");
@@ -68,11 +81,50 @@ void setup() {
   display.clearDisplay();
   display.setTextSize(1);
   display.setTextColor(BLACK);
-  display.setCursor(0,0);
-  display.println("Hello, world!");
   display.display();
-  Serial.println("You should now see Hello, world! on the display");
 }
 
 void loop() {
+  drawCube();
+  delay(ROTATION_SPEED);
+}
+
+void drawCube() {
+  r[0] = r[0] + PI / 180.0; // Add a degree
+  r[1] = r[1] + PI / 180.0; // Add a degree
+  r[2] = r[2] + PI / 180.0; // Add a degree
+  if (r[0] >= 360.0 * PI / 180.0) r[0] = 0;
+  if (r[1] >= 360.0 * PI / 180.0) r[1] = 0;
+  if (r[2] >= 360.0 * PI / 180.0) r[2] = 0;
+
+  for (int i = 0; i < 8; i++) {
+    float px2 = px[i];
+    float py2 = cos(r[0]) * py[i] - sin(r[0]) * pz[i];
+    float pz2 = sin(r[0]) * py[i] + cos(r[0]) * pz[i];
+
+    float px3 = cos(r[1]) * px2 + sin(r[1]) * pz2;
+    float py3 = py2;
+    float pz3 = -sin(r[1]) * px2 + cos(r[1]) * pz2;
+
+    float ax = cos(r[2]) * px3 - sin(r[2]) * py3;
+    float ay = sin(r[2]) * px3 + cos(r[2]) * py3;
+    float az = pz3 - 150;
+
+    p2x[i] = LCDWIDTH / 2 + ax * SHAPE_SIZE / az;
+    p2y[i] = LCDHEIGHT / 2 + ay * SHAPE_SIZE / az;
+  }
+
+  display.clearDisplay();
+
+  for (int i = 0; i < 3; i++) {
+    display.drawLine(p2x[i],   p2y[i],   p2x[i+1], p2y[i+1], BLACK);
+    display.drawLine(p2x[i+4], p2y[i+4], p2x[i+5], p2y[i+5], BLACK);
+    display.drawLine(p2x[i],   p2y[i],   p2x[i+4], p2y[i+4], BLACK);
+  }
+
+  display.drawLine(p2x[3], p2y[3], p2x[0], p2y[0], BLACK);
+  display.drawLine(p2x[7], p2y[7], p2x[4], p2y[4], BLACK);
+  display.drawLine(p2x[3], p2y[3], p2x[7], p2y[7], BLACK);
+
+  display.display();
 }
