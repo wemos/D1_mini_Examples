@@ -4,9 +4,8 @@
  */
 
 const int ledPin = BUILTIN_LED;  // the onboard LED
-int brightness = 0;        // how bright the LED is (0 = off, 128 = dim, 255 = full)
 int fadeAmount = 5;        // how many points to fade the LED by
-const int delayMillis = 30;      // how long to pause between each loop
+const int delayMillis = 10;      // how long to pause between each loop
 
 void setup() {
   pinMode(ledPin, OUTPUT);  // initialize onboard LED as output
@@ -19,12 +18,12 @@ void loop() {
   // increment/decrement the brightness for the next loop
   brightness = brightness + fadeAmount;
 
-  // limit to 8-bit (0-255)
+  // limit to 10-bit (0-1023)
   if (brightness < 0) brightness = 0;
-  if (brightness > 255) brightness = 255;
+  if (brightness > 1023) brightness = 1023;
 
   // reverse the direction of the fading at each end
-  if (brightness == 0 || brightness == 255) {
+  if (brightness == 0 || brightness == 1023) {
     fadeAmount = -fadeAmount;
   }
 
