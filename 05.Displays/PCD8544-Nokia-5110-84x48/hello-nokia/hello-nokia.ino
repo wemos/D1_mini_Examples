@@ -1,5 +1,5 @@
-/* Hello World
- * Display a simple message on the first line of the screen
+/* Hello Nokia
+ * Displays a few Nokia bitmaps
  *
  * Connections:
  * WeMos D1 Mini   Nokia 5110    Description
@@ -29,6 +29,10 @@
 #include <SPI.h>
 #include <Adafruit_GFX.h>
 #include <Adafruit_PCD8544.h>
+
+// Bitmaps
+#include "nokia-hands-84x48.h"
+#include "nokia-home-84x48.h"
 
 // Pins
 const int8_t RST_PIN = D2;
@@ -64,15 +68,18 @@ void setup() {
   // Show the Adafruit logo, which is preloaded into the buffer by their library
   // display.clearDisplay();
   delay(2000);
-
-  display.clearDisplay();
-  display.setTextSize(1);
-  display.setTextColor(BLACK);
-  display.setCursor(0,0);
-  display.println("Hello, world!");
-  display.display();
-  Serial.println("You should now see Hello, world! on the display");
 }
 
 void loop() {
+  display.clearDisplay();
+  display.drawBitmap(0, 0, Nokia_hands_84x48, 84, 48, 1);
+  display.display();
+  Serial.println("Show Nokia splash screen handshake bitmap");
+  delay(2000);
+
+  display.clearDisplay();
+  display.drawBitmap(0, 0, Nokia_home_84x48, 84, 48, 1);
+  Serial.println("Show Nokia home screen bitmap");
+  display.display();
+  delay(2000);
 }

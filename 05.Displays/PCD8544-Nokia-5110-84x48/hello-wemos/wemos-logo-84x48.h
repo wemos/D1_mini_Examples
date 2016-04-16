@@ -1,3 +1,4 @@
+// See https://github.com/mcauser/WeMos-D1-mini-Nokia-5110-PCD8544/blob/master/bitmaps/wemos-logo-84x48.bmp
 // the logo is vertically centred with 10px of whitespace above and below
 // this is not very efficient - instead, use the next bitmap and render it 10px down
 const uint8_t WeMos_logo_84x48[] PROGMEM = {
