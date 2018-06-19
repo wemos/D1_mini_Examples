@@ -22,7 +22,7 @@ void led_set(uint8 R, uint8 G, uint8 B) {
   for (int i = 0; i < LED_NUM; i++) {
     leds.setPixelColor(i, leds.Color(R, G, B));
     leds.show();
-    delay(200);
+    delay(50);
   }
 }
 
