@@ -25,7 +25,12 @@
 #include <SPI.h>
 #include <SD.h>
 
-const int chipSelect = D8;
+
+// change this to match your SD shield or module;
+// WeMos Micro SD Shield V1.0.0: D8
+// LOLIN Micro SD Shield V1.2.0: D4 (Default)
+const int chipSelect = D4;
+
 File myFile;
 
 void setup()

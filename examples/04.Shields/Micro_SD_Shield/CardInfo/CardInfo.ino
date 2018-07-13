@@ -5,14 +5,6 @@
  * SD library is based in order to get info about your SD card.
  * Very useful for testing a card when you're not sure whether its working or not.
  *
- * The WeMos Micro SD Shield uses:
- * D5, D6, D7, D8, 3V3 and G
- *
- * The shield uses SPI bus pins:
- * D5 = CLK
- * D6 = MISO
- * D7 = MOSI
- * D8 = CS
  *
  * The SD card library uses 8.3 format filenames and is case-insensitive.
  * eg. IMAGE.JPG is the same as image.jpg
@@ -34,11 +26,9 @@ SdVolume volume;
 SdFile root;
 
 // change this to match your SD shield or module;
-// Arduino Ethernet shield: pin 4
-// Adafruit SD shields and modules: pin 10
-// Sparkfun SD shield: pin 8
-// WeMos Micro SD Shield: D8
-const int chipSelect = D8;
+// WeMos Micro SD Shield V1.0.0: D8
+// LOLIN Micro SD Shield V1.2.0: D4 (Default)
+const int chipSelect = D4;
 
 void setup()
 {
