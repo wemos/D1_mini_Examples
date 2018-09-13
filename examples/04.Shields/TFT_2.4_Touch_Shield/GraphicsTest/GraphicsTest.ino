@@ -3,8 +3,10 @@
 1. !!!Make sure you using lastest ESP8266 core for Arduino, otherwise it may not work properly.
   https://github.com/esp8266/Arduino
   
-  (The pin D0(GPIO16) is not work with Adafruit_ILI9341 using order version ESP8266 core for Arduino,
-  more:  https://github.com/esp8266/Arduino/commit/799193888a553de8876052019842538396f92194 )
+  (The pin D0(GPIO16) will be not work when you use older version ESP8266 core for Arduino, 
+  because the older version ESP8266 core for Arduino's digitalPinToBitMask(), portOutputRegister(), 
+  portInputRegister() and portModeRegister() fuction have some bugs which Adafruit_ILI9341 Library will use.
+  This bug was fixed after commit:  https://github.com/esp8266/Arduino/commit/799193888a553de8876052019842538396f92194 )
     
 
 2. Setup latest Adafruit_GFX, Adafruit_ILI9341 and XPT2046_Touchscreen Library first:
