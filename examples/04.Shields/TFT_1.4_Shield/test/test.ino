@@ -2,10 +2,13 @@
 #include <Adafruit_ST7735.h> // Hardware-specific library
 #include <SPI.h>
 
-#define TFT_CS     D4
-#define TFT_RST    -1  // you can also connect this to the Arduino reset
-// in which case, set this #define pin to -1!
-#define TFT_DC     D3
+#define TFT_RST -1 //for TFT I2C Connector Shield V1.0.0 and TFT 1.4 Shield V1.0.0
+#define TFT_CS D4  //for TFT I2C Connector Shield V1.0.0 and TFT 1.4 Shield V1.0.0
+#define TFT_DC D3  //for TFT I2C Connector Shield V1.0.0 and TFT 1.4 Shield V1.0.0
+
+// #define TFT_RST -1   //for TFT I2C Connector Shield (V1.1.0 or later)
+// #define TFT_CS D0    //for TFT I2C Connector Shield (V1.1.0 or later)
+// #define TFT_DC D8    //for TFT I2C Connector Shield (V1.1.0 or later)
 
 Adafruit_ST7735 tft = Adafruit_ST7735(TFT_CS,  TFT_DC, TFT_RST);
 
