@@ -1,3 +1,13 @@
+/***************************************************
+
+1. Setup latest Adafruit_GFX and Adafruit_ST7735 Libraries first:
+
+    https://github.com/adafruit/Adafruit-GFX-Library
+
+    https://github.com/adafruit/Adafruit-ST7735-Library
+
+****************************************************/
+
 #include <Adafruit_GFX.h>    // Core graphics library
 #include <Adafruit_ST7735.h> // Hardware-specific library
 #include <SPI.h>
