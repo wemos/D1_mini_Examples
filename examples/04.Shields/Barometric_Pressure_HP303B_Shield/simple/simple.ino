@@ -1,3 +1,5 @@
+//Install [LOLIN_HP303B_Library](https://github.com/wemos/LOLIN_HP303B_Library.git) first.
+
 #include <LOLIN_HP303B.h>
 
 LOLIN_HP303B HP303B;
