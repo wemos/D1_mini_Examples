@@ -5,12 +5,14 @@
  */
 
 void setup() {
-  pinMode(BUILTIN_LED, OUTPUT);  // initialize onboard LED as output
+  pinMode(LED_BUILTIN, OUTPUT);     // Initialize onboard LED as output
 }
 
 void loop() {
-  digitalWrite(BUILTIN_LED, HIGH);  // turn on LED with voltage HIGH
-  delay(1000);                      // wait one second
-  digitalWrite(BUILTIN_LED, LOW);   // turn off LED with voltage LOW
+  digitalWrite(LED_BUILTIN, LOW);   // Turn the LED on (Note that LOW is the voltage level
+                                    // but actually the LED is on; this is because 
+                                    // it is active low on the ESP-01)
+  delay(1000);                      // Wait one second
+  digitalWrite(LED_BUILTIN, HIGH);  // Turn the LED off by making the voltage HIGH
   delay(1000);                      // wait one second
 }
