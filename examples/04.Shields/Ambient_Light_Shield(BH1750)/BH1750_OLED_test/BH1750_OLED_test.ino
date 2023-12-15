@@ -1,10 +1,8 @@
 #include <Wire.h>
-#include <Adafruit_GFX.h>
-#include <Adafruit_SSD1306.h>
+#include "SSD1306Wire.h" 
 #include <BH1750.h>
 
-#define OLED_RESET 0  // GPIO0
-Adafruit_SSD1306 display(OLED_RESET);
+SSD1306Wire display(0x3C, SDA, SCL,GEOMETRY_64_48);
 
 BH1750 light(0x23);
 
@@ -12,28 +10,26 @@ void setup() {
 
   Serial.begin(115200);
 
-  display.begin(SSD1306_SWITCHCAPVCC, 0x3C);
+  display.init();
+  display.flipScreenVertically();
+  display.setFont(ArialMT_Plain_16);
+  display.setTextAlignment(TEXT_ALIGN_LEFT);
 
 }
 
 void loop() {
 
-
-  // Clear the buffer.
-  display.clearDisplay();
-  display.setTextSize(1);
-  display.setCursor(0, 0);
-  display.setTextColor(WHITE);
+  display.clear();
+  
 
   if (light.begin(BH1750::CONTINUOUS_HIGH_RES_MODE)) {
-    display.println("L: ");
-    display.setTextSize(2);
-    display.print(light.readLightLevel());
+
+    display.drawString(0, 0,"L:"+String(light.readLightLevel()));
 
   }
   else
   {
-    display.println("Error!");
+    display.drawString(0, 0,"Error!");
   }
   display.display();
   delay(1000);
