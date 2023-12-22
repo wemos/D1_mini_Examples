@@ -5,7 +5,7 @@
  * 1 Button Shield pushbutton connects pin D3 to GND
  */
 
-const int PIR = D3;
+const int PIR = D2;
 
 
 int PIRState = 0;
